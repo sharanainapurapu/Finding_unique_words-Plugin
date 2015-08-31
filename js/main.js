@@ -100,18 +100,16 @@ function totalString(){
 
 
 function calculate(){
-     str = totalString();
+    var str = totalString();
     var wordFreq = wordFrequency(str);
     var wordCount = countWords(str);
     var uniqueWords = wordFreq.length;
-
     var summaryData = [
             [ 'TOTAL', wordCount ],
             [ 'UNIQUE', uniqueWords ]
         ];
     var table = toTable(wordFreq, ['Word', 'Frequency']);
     addRowsBefore(table, summaryData);
-    //document.getElementById("wordFreq").html(table);
     $("#wordFreq").html(table);
 }
 
