@@ -63,20 +63,20 @@ function padStr(str, ch, width, dir) {
 
 function toTable(data, headers) {
     return $('<table>').append(
-    $('<thead>').append(
-    $('<tr>').append(headers.map(function(header) {
-        return $('<th>').html(header);
-    })
-    )
-)
-)
-.append($('<tbody>').append(data.map(function(row) {
-       return $('<tr>').append(row.map(function(cell) {
-           	return $('<td>').html(cell);
-      })
-      );
-   })
-    ));
+                  $('<thead>').append(
+                    $('<tr>').append(headers.map(function(header) {
+                        return $('<th>').html(header);
+                      })
+                    )
+                  )
+            )
+            .append($('<tbody>').append(data.map(function(row) {
+                     return $('<tr>').append(row.map(function(cell) {
+                         	return $('<td>').html(cell);
+                      })
+                    );
+                  })
+                ));
 }
 
 function addRowsBefore(table, data) {
@@ -98,18 +98,19 @@ function totalString(){
    return finalString;
 }
 
+$(function() {
+   $(".calculate").on("click",function(e){
+        var str = totalString();
+        var wordFreq = wordFrequency(str);
+        var wordCount = countWords(str);
+        var uniqueWords = wordFreq.length;
+        var summaryData = [
+                [ 'TOTAL', wordCount ],
+                [ 'UNIQUE', uniqueWords ]
+            ];
+        var table = toTable(wordFreq, ['Word', 'Frequency']);
+        addRowsBefore(table, summaryData);
+        $("#wordFreq").html(table);
+   });
 
-function calculate(){
-    var str = totalString();
-    var wordFreq = wordFrequency(str);
-    var wordCount = countWords(str);
-    var uniqueWords = wordFreq.length;
-    var summaryData = [
-            [ 'TOTAL', wordCount ],
-            [ 'UNIQUE', uniqueWords ]
-        ];
-    var table = toTable(wordFreq, ['Word', 'Frequency']);
-    addRowsBefore(table, summaryData);
-    $("#wordFreq").html(table);
-}
-
+});
